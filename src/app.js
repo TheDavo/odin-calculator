@@ -9,7 +9,7 @@ const currentTotalDisplay = document.querySelector('#current-total');
 let lhs = null;
 let rhs = null;
 let latestOperator = '';
-
+let history = [];
 const operators = {
   add: '+',
   subtract: '-',
@@ -61,26 +61,19 @@ buttonCompute.addEventListener('click', function () {
   }
 });
 
-const updateCalculator = function (operator) {
-  if (canDoMath()) {
-    totalInputDisplay.innerText = totalInputDisplay.innerText.concat(
-      ' ',
-      currentInput.innerText,
-      ' ',
-      `${operators[operator]}`
-    );
-  }
-  // else {
-  //   if (lhs != null && rhs == null) {
-  //     totalInputDisplay.innerText = ''.concat(
-  //       lhs,
-  //       ' ',
-  //       totalInputDisplay.innerText.replace(operators[latestOperator], operator)
-  //     );
-  //   }
-  // }
+const updateCalculatorDisplay = function (operator) {
+  totalInputDisplay.innerText = getHistoryInStr();
   currentInput.innerText = '0';
   currentTotalDisplay.innerText = currentResult;
+};
+
+const getHistoryInStr = function () {
+  let resStr = '';
+  for (let input of history) {
+    resStr = resStr.concat(input, ' ');
+  }
+
+  return resStr;
 };
 
 const canDoMath = function () {
@@ -101,26 +94,24 @@ const doMath = function (operator, lhs, rhs) {
 };
 
 const doMathAndUpdate = function (operator) {
-  if (canDoMath()) {
-    currentResult = doMath(operator, lhs, rhs);
-    lhs = currentResult;
-    rhs = null;
-  } else {
-    const curIn = parseFloat(currentInput.innerText);
+  const curIn = currentInput.innerText;
+  if (!canDoMath()) {
     if (lhs == null) {
-      lhs = curIn;
+      lhs = parseFloat(curIn);
+      latestOperator = operator;
+      history.push(lhs);
     } else if (rhs == null) {
-      if (curIn === 0) {
-        updateCalculator(operator);
-        return;
-      }
-      rhs = curIn;
+      rhs = parseFloat(curIn);
       currentResult = doMath(operator, lhs, rhs);
+      history.push(operators[operator]);
+      history.push(rhs);
       lhs = currentResult;
       rhs = null;
+      latestOperator = operator;
     }
   }
-  updateCalculator(operator);
+  updateCalculatorDisplay(operator);
+  console.log(history);
 };
 
 /* Bind non-math functions */
@@ -132,4 +123,5 @@ buttonAC.addEventListener('click', () => {
   totalInputDisplay.innerText = '';
   lhs = null;
   rhs = null;
+  history = [];
 });
