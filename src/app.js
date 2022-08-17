@@ -1,11 +1,13 @@
 let currentResult = 0; //Actual number result
-let currentInput = document.getElementById('input'); // String input from calculator
 
 /* Initialize buttons with event listeners */
+let currentInput = document.getElementById('input'); // String input from calculator
 const numbers = document.querySelectorAll('.buttons .number');
 const totalInputDisplay = document.querySelector('#total-input');
 const currentTotalDisplay = document.querySelector('#current-total');
 const historyTableBody = document.querySelector('#history-table-body');
+
+const maxLength = 10;
 let latestOperator = '';
 let history = [];
 let fullHistory = [];
@@ -20,12 +22,16 @@ const operators = {
 
 for (let number of numbers) {
   number.addEventListener('click', (event) => {
-    if (currentInput.innerText === '0') {
-      currentInput.innerText = event.target.innerText;
+    if (currentInput.innerText.length <= maxLength) {
+      if (currentInput.innerText === '0') {
+        currentInput.innerText = event.target.innerText;
+      } else {
+        currentInput.innerText = currentInput.innerText.concat(
+          event.target.innerText
+        );
+      }
     } else {
-      currentInput.innerText = currentInput.innerText.concat(
-        event.target.innerText
-      );
+      alert('Max Number Limit Reached');
     }
   });
 }
