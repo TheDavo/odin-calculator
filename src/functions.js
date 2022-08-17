@@ -1,19 +1,19 @@
-function add(currentValue, b) {
-  return currentValue + b;
+function add(a, b) {
+  return a + b;
 }
 
-function subtract(currentValue, b) {
-  return currentValue - b;
+function subtract(a, b) {
+  return a - b;
 }
 
-function multiply(currentValue, b) {
+function multiply(a, b) {
   return a * b;
 }
 
-function divide(currentValue, b) {
+function divide(a, b) {
   if (b == 0) {
     return NaN;
   }
 
-  return currentValue / b;
+  return a / b;
 }
