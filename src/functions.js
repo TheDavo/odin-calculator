@@ -1,18 +1,16 @@
-export const name = 'functions';
-
-export function add(currentValue, b) {
-  return a + b;
+function add(currentValue, b) {
+  return currentValue + b;
 }
 
-export function subtract(currentValue, b) {
+function subtract(currentValue, b) {
   return currentValue - b;
 }
 
-export function multiply(currentValue, b) {
+function multiply(currentValue, b) {
   return a * b;
 }
 
-export function divide(currentValue, b) {
+function divide(currentValue, b) {
   if (b == 0) {
     return NaN;
   }

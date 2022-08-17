@@ -29,7 +29,7 @@ main {
   margin: 1rem;
 }
 
-.results-screen .input {
+.results-screen #input {
   font-size: 3rem;
   text-align: right;
 }
