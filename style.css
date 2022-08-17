@@ -151,13 +151,13 @@ header h1 {
 
 /* FOOTER STYLING */
 footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 3rem;
+  margin: 1rem 0;
 }
 
 footer a {
