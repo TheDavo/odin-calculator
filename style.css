@@ -56,3 +56,8 @@ main {
   transition: ease 100ms;
   border-radius: 1rem;
 }
+
+#buttonAC {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
