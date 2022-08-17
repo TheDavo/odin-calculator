@@ -6,34 +6,41 @@
 }
 
 body {
-  background-color: rgb(48, 48, 48);
+  background-color: #fcb31b;
 }
 
 main {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 header h1 {
   text-align: center;
   padding: 4rem;
-  color: white;
+  color: black;
   font-size: 3rem;
 }
 .calculator-container {
   width: 500px;
   padding-top: 1rem;
-  border: 1rem solid gray;
-  border-radius: 15px;
-  background-color: black;
   color: gold;
 }
 
-.results-screen {
-  padding: 2rem 1rem;
-  border: 3px solid gold;
+.calculator {
   margin: 1rem;
+  border-radius: 2rem;
+  background-color: rgb(49, 49, 49);
+  padding: 1rem;
+  padding-top: 3rem;
+  box-shadow: 5px 10px 30px 0px #000;
+}
+
+.results-screen {
+  padding: 1rem;
+  border: 3px solid gold;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 10px;
 }
 
 .results-screen #input {
@@ -44,7 +51,6 @@ header h1 {
 .buttons {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  padding: 10px;
 }
 
 .buttons button {
@@ -66,23 +72,78 @@ header h1 {
   color: white;
 }
 
-.buttons .function.calc:hover,
-#buttonCompute:hover {
-  background-color: rgb(0, 0, 0);
+.buttons .function.calc:hover {
+  background-color: steelblue;
   transition: ease 100ms;
   border-radius: 1rem;
   color: white;
 }
-
+#buttonCompute:hover {
+  background-color: seagreen;
+  transition: ease 100ms;
+  border-radius: 1rem;
+  color: white;
+}
 .buttons button:hover {
   background-color: rgb(31, 30, 22);
   transition: ease 100ms;
   border-radius: 1rem;
   color: gold;
   border: 3px solid white;
+  transform: translateY(-3px);
 }
 
 #buttonAC {
   grid-column-start: 1;
   grid-column-end: 4;
+  border-top-left-radius: 1rem;
+}
+
+#buttonAC:hover {
+  background: rgb(124, 55, 55);
+}
+
+#num0 {
+  border-bottom-left-radius: 1rem;
+}
+
+#buttonCompute {
+  border-bottom-right-radius: 1rem;
+}
+
+#buttonDivide {
+  border-top-right-radius: 1rem;
+}
+
+/* TABLE STYLING */
+
+.history {
+  margin-left: 3rem;
+  color: black;
+}
+#history-table {
+  border-collapse: collapse;
+}
+
+#history-table thead th {
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+#history-table-body tr {
+  padding: 2rem;
+  margin: 2rem;
+  border-top: 3px solid slategrey;
+  transition: ease-in 100ms;
+}
+
+#history-table-body tr:hover {
+  background-color: black;
+  color: white;
+  border-top: 3px solid gold;
+  border-bottom: 3px solid gold;
+}
+
+#history-table-body tr td {
+  padding: 1rem;
 }

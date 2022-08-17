@@ -144,18 +144,18 @@ const resetCalculator = function () {
 
 const addNewCalculationToTable = function () {
   const newRow = document.createElement('tr');
+  historyTableBody.appendChild(newRow);
   const calculation = getHistory(
     fullHistory[fullHistory.length - 1].calculation
   );
   const result = fullHistory[fullHistory.length - 1].result;
 
-  let calcTd = document.createElement('td');
+  const calcTd = document.createElement('td');
   calcTd.innerText = calculation;
-  newRow.appendChild(calcTd);
 
-  let resultTd = document.createElement('td');
+  const resultTd = document.createElement('td');
   resultTd.innerText = result;
-  newRow.appendChild(resultTd);
 
-  historyTableBody.appendChild(newRow);
+  newRow.appendChild(calcTd);
+  newRow.appendChild(resultTd);
 };

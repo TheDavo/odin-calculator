@@ -24,7 +24,9 @@
           </div>
           <!-- START Calculator Inputs-->
           <div class="buttons">
-            <button type="button" class="function" id="buttonAC">AC</button>
+            <button type="button" class="function" id="buttonAC">
+              All Clear
+            </button>
             <!-- <button class="function" id="buttonParan">()</button>
             <button class="function" id="buttonPercent">%</button> -->
             <button
@@ -70,14 +72,24 @@
             </button>
             <button type="button" class="number" id="num0">0</button>
             <button type="button" class="function" id="buttonDecimal">.</button>
-            <button type="button" class="function" id="buttonDel">Del</button>
+            <button type="button" class="function" id="buttonDel">Bk</button>
             <button type="button" class="function" id="buttonCompute">=</button>
           </div>
           <!-- END Calculator Inputs-->
         </div>
       </div>
 
-      <div class="history"></div>
+      <div class="history">
+        <table id="history-table">
+          <thead>
+            <tr>
+              <th>Calculation Input</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body"></tbody>
+        </table>
+      </div>
     </main>
   </body>
 </html>
