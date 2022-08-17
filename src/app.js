@@ -8,6 +8,8 @@ const currentTotalDisplay = document.querySelector('#current-total');
 
 let latestOperator = '';
 let history = [];
+let fullHistory = [];
+let hasDecimal = false;
 const operators = {
   add: '+',
   subtract: '-',
@@ -47,6 +49,11 @@ buttonCompute.addEventListener('click', function () {
     history.push(parseFloat(currentInput.innerText));
   }
   doMathAndUpdate();
+  fullHistory.push({
+    calculation: history,
+    result: parseFloat(currentTotalDisplay.innerText),
+  });
+  resetCalculator();
 });
 
 const buttonDel = document.querySelector('#buttonDel');
@@ -55,20 +62,13 @@ buttonDel.addEventListener('click', () => {
   updateCalculatorDisplay(latestOperator);
 });
 
-const updateCalculatorDisplay = function (operator) {
-  totalInputDisplay.innerText = getHistoryInStr();
-  currentInput.innerText = '0';
-  currentTotalDisplay.innerText = currentResult;
-};
-
-const getHistoryInStr = function () {
-  let resStr = '';
-  for (let input of history) {
-    resStr = resStr.concat(input, ' ');
+const buttonDecimal = document.querySelector('#buttonDecimal');
+buttonDecimal.addEventListener('click', () => {
+  if (!hasDecimal) {
+    currentInput.innerText = currentInput.innerText.concat('.');
+    hasDecimal = true;
   }
-
-  return resStr;
-};
+});
 
 const doMath = function (operator, lhs, rhs) {
   switch (operator) {
@@ -97,15 +97,35 @@ const doMathAndUpdate = function () {
   }
 
   currentResult = totalResult;
-  updateCalculatorDisplay(latestOperator);
+  updateCalculatorDisplay();
 };
 
-/* Bind non-math functions */
+/* Non-math functions */
 const buttonAC = document.querySelector('#buttonAC');
 buttonAC.addEventListener('click', () => {
+  resetCalculator();
+});
+
+const updateCalculatorDisplay = function () {
+  totalInputDisplay.innerText = getHistoryInStr();
+  currentInput.innerText = '0';
+  hasDecimal = false;
+  currentTotalDisplay.innerText = currentResult;
+};
+
+const getHistoryInStr = function () {
+  let resStr = '';
+  for (let input of history) {
+    resStr = resStr.concat(input, ' ');
+  }
+
+  return resStr;
+};
+
+const resetCalculator = function () {
   currentResult = 0;
   currentInput.innerText = '0';
   currentTotalDisplay.innerText = '0';
   totalInputDisplay.innerText = '';
   history = [];
-});
+};
