@@ -6,8 +6,6 @@ const numbers = document.querySelectorAll('.buttons .number');
 const totalInputDisplay = document.querySelector('#total-input');
 const currentTotalDisplay = document.querySelector('#current-total');
 
-let lhs = null;
-let rhs = null;
 let latestOperator = '';
 let history = [];
 const operators = {
@@ -33,32 +31,54 @@ for (let number of numbers) {
 const buttonAdd = document.querySelector('#buttonAdd');
 buttonAdd.addEventListener('click', function () {
   latestOperator = 'add';
-  doMathAndUpdate('add');
+  if (typeof history[history.length - 1] != 'number') {
+    history.push(parseFloat(currentInput.innerText));
+  }
+
+  history.push(latestOperator);
+  doMathAndUpdate();
 });
 
 const buttonSubtract = document.querySelector('#buttonSubtract');
 buttonSubtract.addEventListener('click', function () {
   latestOperator = 'subtract';
-  doMathAndUpdate('subtract');
+
+  if (typeof history[history.length - 1] != 'number') {
+    history.push(parseFloat(currentInput.innerText));
+  }
+  history.push(latestOperator);
+
+  doMathAndUpdate();
 });
 
 const buttonMultiply = document.querySelector('#buttonMultiply');
 buttonMultiply.addEventListener('click', function () {
   latestOperator = 'multiply';
-  doMathAndUpdate('multiply');
+  if (typeof history[history.length - 1] != 'number') {
+    history.push(parseFloat(currentInput.innerText));
+  }
+  history.push(latestOperator);
+
+  doMathAndUpdate();
 });
 
 const buttonDivide = document.querySelector('#buttonDivide');
 buttonDivide.addEventListener('click', function () {
   latestOperator = 'divide';
-  doMathAndUpdate('divide');
+  if (typeof history[history.length - 1] != 'number') {
+    history.push(parseFloat(currentInput.innerText));
+  }
+  history.push(latestOperator);
+
+  doMathAndUpdate();
 });
 
 const buttonCompute = document.querySelector('#buttonCompute');
 buttonCompute.addEventListener('click', function () {
-  if (latestOperator) {
-    doMathAndUpdate(latestOperator);
+  if (typeof history[history.length - 1] != 'number') {
+    history.push(parseFloat(currentInput.innerText));
   }
+  doMathAndUpdate();
 });
 
 const updateCalculatorDisplay = function (operator) {
@@ -93,25 +113,21 @@ const doMath = function (operator, lhs, rhs) {
   }
 };
 
-const doMathAndUpdate = function (operator) {
-  const curIn = currentInput.innerText;
-  if (!canDoMath()) {
-    if (lhs == null) {
-      lhs = parseFloat(curIn);
-      latestOperator = operator;
-      history.push(lhs);
-    } else if (rhs == null) {
-      rhs = parseFloat(curIn);
-      currentResult = doMath(operator, lhs, rhs);
-      history.push(operators[operator]);
-      history.push(rhs);
-      lhs = currentResult;
-      rhs = null;
-      latestOperator = operator;
+const doMathAndUpdate = function () {
+  let shouldMath = false;
+  let totalResult = history[0];
+  for (let input of history) {
+    if (typeof input === 'string') {
+      latestOperator = input;
+      shouldMath = true;
+    } else if (shouldMath) {
+      totalResult = doMath(latestOperator, totalResult, input);
+      shouldMath = false;
     }
   }
-  updateCalculatorDisplay(operator);
-  console.log(history);
+
+  currentResult = totalResult;
+  updateCalculatorDisplay(latestOperator);
 };
 
 /* Bind non-math functions */
