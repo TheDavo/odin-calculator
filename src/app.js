@@ -5,7 +5,7 @@ let currentInput = document.getElementById('input'); // String input from calcul
 const numbers = document.querySelectorAll('.buttons .number');
 const totalInputDisplay = document.querySelector('#total-input');
 const currentTotalDisplay = document.querySelector('#current-total');
-
+const historyTableBody = document.querySelector('#history-table-body');
 let latestOperator = '';
 let history = [];
 let fullHistory = [];
@@ -53,6 +53,7 @@ buttonCompute.addEventListener('click', function () {
     calculation: history,
     result: parseFloat(currentTotalDisplay.innerText),
   });
+  addNewCalculationToTable();
   resetCalculator();
 });
 
@@ -100,7 +101,7 @@ const doMathAndUpdate = function () {
   updateCalculatorDisplay();
 };
 
-/* Non-math functions */
+/* NON-MATH FUNCTIONS */
 const buttonAC = document.querySelector('#buttonAC');
 buttonAC.addEventListener('click', () => {
   resetCalculator();
@@ -122,10 +123,39 @@ const getHistoryInStr = function () {
   return resStr;
 };
 
+const getHistory = function (history) {
+  let resStr = '';
+  for (let input of history) {
+    resStr = resStr.concat(input, ' ');
+  }
+
+  return resStr;
+};
+
 const resetCalculator = function () {
   currentResult = 0;
   currentInput.innerText = '0';
   currentTotalDisplay.innerText = '0';
   totalInputDisplay.innerText = '';
   history = [];
+};
+
+/* TABLE FUNCTION */
+
+const addNewCalculationToTable = function () {
+  const newRow = document.createElement('tr');
+  const calculation = getHistory(
+    fullHistory[fullHistory.length - 1].calculation
+  );
+  const result = fullHistory[fullHistory.length - 1].result;
+
+  let calcTd = document.createElement('td');
+  calcTd.innerText = calculation;
+  newRow.appendChild(calcTd);
+
+  let resultTd = document.createElement('td');
+  resultTd.innerText = result;
+  newRow.appendChild(resultTd);
+
+  historyTableBody.appendChild(newRow);
 };
