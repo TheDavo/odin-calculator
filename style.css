@@ -12,6 +12,7 @@ body {
 main {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 header h1 {
@@ -32,7 +33,7 @@ header h1 {
   background-color: rgb(49, 49, 49);
   padding: 1rem;
   padding-top: 3rem;
-  box-shadow: 5px 10px 30px 0px #000;
+  box-shadow: inset 5px 10px 30px 0px #000;
 }
 
 .results-screen {
@@ -146,4 +147,29 @@ header h1 {
 
 #history-table-body tr td {
   padding: 1rem;
+}
+
+/* FOOTER STYLING */
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+footer a {
+  text-decoration: none;
+  color: gold;
+  padding: 1rem 3rem;
+
+  background-color: black;
+  border-radius: 1rem;
+  transition: linear 100ms;
+}
+
+footer a:hover {
+  transform: translateY(-1rem);
 }
