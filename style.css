@@ -14,6 +14,13 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+header h1 {
+  text-align: center;
+  padding: 4rem;
+  color: white;
+  font-size: 3rem;
+}
 .calculator-container {
   width: 500px;
   padding-top: 1rem;
@@ -49,12 +56,30 @@ main {
   border: 3px solid gold;
   transition: ease 100ms;
   cursor: pointer;
+  color: white;
+}
+
+.buttons .function.calc,
+#buttonCompute {
+  background-color: rgb(148, 126, 0);
+  border: 3px solid white;
+  color: white;
+}
+
+.buttons .function.calc:hover,
+#buttonCompute:hover {
+  background-color: rgb(0, 0, 0);
+  transition: ease 100ms;
+  border-radius: 1rem;
+  color: white;
 }
 
 .buttons button:hover {
   background-color: rgb(31, 30, 22);
   transition: ease 100ms;
   border-radius: 1rem;
+  color: gold;
+  border: 3px solid white;
 }
 
 #buttonAC {
