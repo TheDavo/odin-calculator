@@ -28,50 +28,18 @@ for (let number of numbers) {
   });
 }
 
-const buttonAdd = document.querySelector('#buttonAdd');
-buttonAdd.addEventListener('click', function () {
-  latestOperator = 'add';
-  if (typeof history[history.length - 1] != 'number') {
-    history.push(parseFloat(currentInput.innerText));
-  }
+const calcButtons = document.querySelectorAll('.function.calc');
+for (let button of calcButtons) {
+  button.addEventListener('click', (event) => {
+    latestOperator = event.target.value;
+    if (typeof history[history.length - 1] != 'number') {
+      history.push(parseFloat(currentInput.innerText));
+    }
 
-  history.push(latestOperator);
-  doMathAndUpdate();
-});
-
-const buttonSubtract = document.querySelector('#buttonSubtract');
-buttonSubtract.addEventListener('click', function () {
-  latestOperator = 'subtract';
-
-  if (typeof history[history.length - 1] != 'number') {
-    history.push(parseFloat(currentInput.innerText));
-  }
-  history.push(latestOperator);
-
-  doMathAndUpdate();
-});
-
-const buttonMultiply = document.querySelector('#buttonMultiply');
-buttonMultiply.addEventListener('click', function () {
-  latestOperator = 'multiply';
-  if (typeof history[history.length - 1] != 'number') {
-    history.push(parseFloat(currentInput.innerText));
-  }
-  history.push(latestOperator);
-
-  doMathAndUpdate();
-});
-
-const buttonDivide = document.querySelector('#buttonDivide');
-buttonDivide.addEventListener('click', function () {
-  latestOperator = 'divide';
-  if (typeof history[history.length - 1] != 'number') {
-    history.push(parseFloat(currentInput.innerText));
-  }
-  history.push(latestOperator);
-
-  doMathAndUpdate();
-});
+    history.push(latestOperator);
+    doMathAndUpdate();
+  });
+}
 
 const buttonCompute = document.querySelector('#buttonCompute');
 buttonCompute.addEventListener('click', function () {
@@ -79,6 +47,12 @@ buttonCompute.addEventListener('click', function () {
     history.push(parseFloat(currentInput.innerText));
   }
   doMathAndUpdate();
+});
+
+const buttonDel = document.querySelector('#buttonDel');
+buttonDel.addEventListener('click', () => {
+  history.pop();
+  updateCalculatorDisplay(latestOperator);
 });
 
 const updateCalculatorDisplay = function (operator) {
@@ -94,10 +68,6 @@ const getHistoryInStr = function () {
   }
 
   return resStr;
-};
-
-const canDoMath = function () {
-  return lhs != null && rhs != null;
 };
 
 const doMath = function (operator, lhs, rhs) {
@@ -137,7 +107,5 @@ buttonAC.addEventListener('click', () => {
   currentInput.innerText = '0';
   currentTotalDisplay.innerText = '0';
   totalInputDisplay.innerText = '';
-  lhs = null;
-  rhs = null;
   history = [];
 });
